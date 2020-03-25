@@ -46,29 +46,38 @@ namespace TestConsoleApplication
 
             ThreadPool.SetMaxThreads(5, 5);
 
-            Stopwatch sw1 = new Stopwatch();
+           
             sw1.Start();
             //耗时巨大的代码
-            
-            ThreadPool.QueueUserWorkItem(Runing, 1);  //            
-            sw1.Stop();
-            TimeSpan ts1 = sw1.Elapsed;
-            Console.WriteLine("Stopwatch cost time:{0}ms.", ts1.TotalMilliseconds);
 
+            ThreadPool.QueueUserWorkItem(Runing, 1);  //            
+            
+
+            Console.WriteLine(end);
             //Thread.Sleep(1000);
             //Console.WriteLine(string.Format("Money: {0}", i));
             Console.ReadKey();
         }
-
+        static Stopwatch sw1 = new Stopwatch();
+        static bool end = false;
 
         private static void Runing(object mParam)
         {
             //m_money += int.Parse(mParam.ToString());
             long i = 0;
-            for (i = 0; i < 10000; i++)
+            for (i = 0; i < 1000000000; i++)
             {
 
             }
+            for (i = 0; i < 1000000000; i++)
+            {
+
+            }
+            end = true;
+            sw1.Stop();
+            TimeSpan ts1 = sw1.Elapsed;
+            Console.WriteLine("Stopwatch cost time:{0}ms.", ts1.TotalMilliseconds);
+            Console.WriteLine(end);
         }
     }
 }
